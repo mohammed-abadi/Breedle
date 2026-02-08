@@ -3,9 +3,42 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script defer src="./script.js"></script>
+    <title>Guess Game</title>
     <link rel="stylesheet" href="./style.css" />
-    <title>WordLOL</title>
+    <script src="./script.js" defer></script>
   </head>
-  <body></body>
+
+  <body>
+    <main class="game-container">
+      <!-- Picture hint  -->
+      <section class="picture-section">
+        <img id="hint-image" src="" alt="Hint Image" />
+        <div id="guess-count">0 / 6</div>
+      </section>
+
+      <!-- Input -->
+      <section class="input-section">
+        <form id="guess-form">
+          <input
+            id="guess-input"
+            type="text"
+            placeholder="Enter guess"
+            autocomplete="off"
+          />
+          <button type="submit">Guess</button>
+        </form>
+      </section>
+
+      <!-- Guess history -->
+      <section class="history-section">
+        <div id="history-container"></div>
+      </section>
+
+      <!-- Keyboard -->
+      <section class="keyboard-section">
+        <h2>Keyboard</h2>
+        <div id="keyboard"></div>
+      </section>
+    </main>
+  </body>
 </html>
