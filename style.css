@@ -22,14 +22,14 @@ body {
   background: transparent;
 }
 
-.key.absent /* work in progress */ {
+.absent /* work in progress */ {
   opacity: 0.45; /* was gonna grey it out think this is good? */
 }
 
-.key.present /* work in progress */ {
+.present /* work in progress */ {
   border-color: #b08a00;
 }
 
-.key.correct /* work in progress */ {
+.correct /* work in progress */ {
   border-color: #0a7a2f;
 }
