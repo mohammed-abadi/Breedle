@@ -2,6 +2,16 @@ const keyboard = document.getElementById("keyboard")
 
 // const letters = "abcdefghijklmnopqrstuvwxyz"
 const letters = "qwertyuiopasdfghjklzxcvbnm"
+const words = ["javascript", "hangman", "programming", "developer", "algorithm"]
+const input = document.getElementById("guess-input")
+const submit = document.getElementById("sBtn")
+let currentGuess = 1
+const maxGuesses = 6
+const count = document.getElementById("guess-count")
+
+const randomWord = words[Math.floor(Math.random() * words.length)]
+const winningWord = randomWord
+console.log(randomWord)
 
 letters.split("").forEach((letter) => {
   const key = document.createElement("button")
@@ -11,37 +21,36 @@ letters.split("").forEach((letter) => {
 })
 // disable the button and instead of making a div or whatever having this is more convenient
 const key = document.getElementById("keyboard")
-key.setAttribute = "disabled"
+key.setAttribute("disabled", "disabled")
 key.style.pointerEvents = "none"
 
-const input = document.getElementById("guess-input")
-const submit = document.getElementById("sBtn")
-let currentGuess = 1
-const maxGuesses = 6
-const count = document.getElementById("guess-count")
 function updateGuessDisplay() {
-  if (currentGuess < 6) {
+  if (currentGuess < maxGuesses) {
     currentGuess++
     count.textContent = currentGuess + " / " + maxGuesses
-  } else if (currentGuess <= 6) {
+  } else if (currentGuess <= maxGuesses) {
     alert("Game Over")
-    location.reload()
+    localStorage.setItem("correctWord", randomWord)
+    window.location.href = "lose.html"
   }
 }
+// stores the correct word in local storage so that it can be accessed on the win and lose pages
+const word = localStorage.getItem("correctWord")
+const correctAnswerEl = document.getElementById("correct-answer")
+if (correctAnswerEl) correctAnswerEl.textContent = word
 
 submit.addEventListener("click", () => {
   const guess = input.value.toLowerCase()
   if (guess === randomWord) {
     alert("Congratulations! You've guessed the word!")
+    localStorage.setItem("correctWord", randomWord)
+    window.location.href = "win.html"
   } else {
-    alert("Wrong guess! Try again.")
-    updateGuessDisplay()
+    alert("Sorry, that's not the correct word. Try again!")
   }
   console.log(guess)
   input.value = ""
 })
 
 // make an array of words and then randomly select one for the user to guess
-const words = ["javascript", "hangman", "programming", "developer", "algorithm"]
-const randomWord = words[Math.floor(Math.random() * words.length)]
-console.log(randomWord) // for testing purposes
+// for testing purposes
