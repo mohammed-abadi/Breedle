@@ -41,6 +41,37 @@ const key = document.getElementById("keyboard")
 key.setAttribute("disabled", "disabled")
 key.style.pointerEvents = "none"
 
+function checkGuess(guess) {
+  const result = []
+
+  for (let i = 0; i < guess.length; i++) {
+    if (guess[i] === randomWord[i]) {
+      result.push("correct")
+    } else if (randomWord.includes(guess[i])) {
+      result.push("present")
+    } else {
+      result.push("absent")
+    }
+  }
+
+  return result
+}
+
+function updateKeyboard(guess, result) {
+  const keys = document.querySelectorAll("#keyboard .key")
+
+  keys.forEach((k) => {
+    const letter = k.textContent.toLowerCase()
+
+    for (let i = 0; i < guess.length; i++) {
+      if (guess[i] === letter) {
+        k.classList.remove("correct", "present", "absent")
+        k.classList.add(result[i])
+      }
+    }
+  })
+}
+
 function updateGuessDisplay() {
   if (currentGuess < maxGuesses) {
     currentGuess++
@@ -53,6 +84,16 @@ function updateGuessDisplay() {
 
 submit.addEventListener("click", () => {
   const guess = input.value.toLowerCase()
+
+  if (guess.length !== randomWord.length) {
+    alert("Wrong length! It must be " + randomWord.length + " letters.")
+    input.value = ""
+    return
+  }
+
+  const result = checkGuess(guess)
+  updateKeyboard(guess, result)
+
   if (guess === randomWord) {
     alert("Congratulations! You've guessed the word: " + randomWord)
     window.location.href = "./win.html"
@@ -60,6 +101,7 @@ submit.addEventListener("click", () => {
     alert("Sorry, that's not the correct word. Try again!")
     updateGuessDisplay()
   }
+
   console.log(guess)
   input.value = ""
 })

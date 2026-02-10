@@ -80,34 +80,46 @@ body {
   margin: 0;
 }
 
+/* Wordle-style keyboard */
 #keyboard {
   display: grid;
   grid-template-columns: repeat(10, 1fr);
-  gap: 8px;
+  gap: 6px;
   width: 100%;
   max-width: 520px;
   margin: 0 auto;
 }
 
-.key {
-  border: 2px solid #444;
-  border-radius: 8px;
-  padding: 10px 0;
-  font-size: 14px;
+#keyboard .key {
+  height: 58px;
+  border: none;
+  border-radius: 6px;
+  background: #d3d6da;
+  color: #111;
   font-weight: 700;
-  background: transparent;
+  font-size: 14px;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: default;
+  user-select: none;
 }
 
-.absent {
-  opacity: 0.45;
+#keyboard .key.absent {
+  background: #787c7e;
+  color: #fff;
+  opacity: 1;
 }
 
-.present {
-  border-color: #b08a00;
+#keyboard .key.present {
+  background: #c9b458;
+  color: #fff;
 }
 
-.correct {
-  border-color: #0a7a2f;
+#keyboard .key.correct {
+  background: #6aaa64;
+  color: #fff;
 }
 
 button {
