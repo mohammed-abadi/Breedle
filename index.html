@@ -2,47 +2,72 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>StarterPage</title>
+    <title>Breedle</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <link rel="stylesheet" href="./style.css" />
-    <script defer src="script.js"></script>
   </head>
-  <style>
-    #imgStart {
-      display: block;
-      margin: 0 auto;
-      width: 470px;
-      height: 470px;
-      object-fit: cover;
-      border-radius: 15px;
-      border: 3px solid #4b4b4b;
-      box-shadow: 0px 6px 18px rgba(0, 0, 0, 0.18);
-    }
-
-    h1,
-    p {
-      color: black;
-    }
-  </style>
 
   <body>
-    <div class="game-container">
-      <h1>Guess The Breed</h1>
-      <img
-        id="imgStart"
-        src="https://images.dog.ceo/breeds/finnish-lapphund/img_3801.jpg"
-        alt="Image of a dog"
-      />
-      <p>Test your knowledge. Can you guess the dog breed from the image?</p>
+    <main class="hero-shell">
+      <section class="hero-card">
+        <div class="hero-left">
+          <span class="pill">BREEDLE • GUESS THE BREED</span>
 
-      <button onclick="playAgain()" id="play-btn">Play Game</button>
-    </div>
+          <h1>
+            Guess the <span class="accent">Dog Breed</span><br />
+            from the picture.
+          </h1>
+
+          <p class="sub">
+            Test your knowledge. You get 6 tries try your luck!.
+          </p>
+
+          <div class="cta-row">
+            <button class="cta" id="play-btn" type="button">Play Game</button>
+            <div class="mini">
+              <div class="dot"></div>
+            </div>
+          </div>
+
+          <div class="stats">
+            <div class="stat">
+              <div class="stat-num">6</div>
+              <div class="stat-label">Max guesses</div>
+            </div>
+            <div class="stat">
+              <div class="stat-num">All dog breeds</div>
+              <div class="stat-label">Random breeds</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-right">
+          <div class="image-wrap">
+            <img
+              id="hero-img"
+              src="https://images.dog.ceo/breeds/cotondetulear/100_2013.jpg"
+              alt="Image of a dog"
+            />
+            <div class="img-glow"></div>
+          </div>
+
+          <div class="badge">
+            <span class="badge-strong">Tip:</span> Start with the length +
+            common breeds.
+          </div>
+        </div>
+
+        <div class="goo goo-a"></div>
+        <div class="goo goo-b"></div>
+        <div class="goo goo-c"></div>
+        <div class="waves"></div>
+      </section>
+    </main>
+
+    <script>
+      document.getElementById("play-btn").addEventListener("click", () => {
+        window.location.href = "game.html"
+      })
+    </script>
   </body>
-
-  <script>
-    function playAgain() {
-      window.location.href = "game.html"
-    }
-  </script>
 </html>
