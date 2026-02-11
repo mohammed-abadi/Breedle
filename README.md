@@ -48,9 +48,9 @@ The image reveals more clearly as the guesses progress.
 
 ## Technologies Used
 
-- HTML5
-- CSS3
-- JavaScript (ES6)
+- HTML
+- CSS
+- JavaScript
 - Axios (API requests)
 
 ---
