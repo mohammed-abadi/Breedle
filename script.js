@@ -73,7 +73,6 @@ function updateGuessDisplay() {
     currentGuess++
     count.textContent = "Guess Count: " + currentGuess + " / " + maxGuesses
   } else if (currentGuess <= maxGuesses) {
-    alert("Game Over Word was: " + randomWord)
     window.location.href = "./lose.html"
   }
 }
@@ -94,10 +93,8 @@ submit.addEventListener("click", () => {
   addHistory(guess, result)
 
   if (guess === randomWord) {
-    alert("Congratulations! You've guessed the word: " + randomWord)
     window.location.href = "./win.html"
   } else {
-    alert("Sorry, that's not the correct word. Try again!")
     updateGuessDisplay()
   }
 
