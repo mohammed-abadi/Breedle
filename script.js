@@ -1,8 +1,6 @@
-const keyboard = document.getElementById("keyboard")
-
 // const letters = "abcdefghijklmnopqrstuvwxyz"
-const letters = "qwertyuiopasdfghjklzxcvbnm"
-/* const words = ["javascript", "hangman", "programming", "developer", "algorithm"] */
+// const words = ["javascript", "hangman", "programming", "developer", "algorithm"]
+
 const input = document.getElementById("guess-input")
 const submit = document.getElementById("sBtn")
 let currentGuess = 1
@@ -10,10 +8,11 @@ const maxGuesses = 6
 const count = document.getElementById("guess-count")
 const img = document.getElementById("hint-image")
 const historyContainer = document.getElementById("history-container")
+const wordLengthDisplay = document.getElementById("word-length")
 
 let randomWord = ""
 
-async function setupGame() {
+async function setupData() {
   let listRes = await axios.get("https://dog.ceo/api/breeds/list/all")
 
   let breeds = Object.keys(listRes.data.message)
@@ -22,6 +21,8 @@ async function setupGame() {
 
   console.log(randomWord)
 
+  wordLengthDisplay.textContent = "Word Length: " + randomWord.length
+
   let imgRen = await axios.get(
     `https://dog.ceo/api/breed/${randomWord}/images/random`
   )
@@ -29,18 +30,7 @@ async function setupGame() {
   img.src = imgRen.data.message
 }
 
-setupGame()
-
-letters.split("").forEach((letter) => {
-  const key = document.createElement("button")
-  key.textContent = letter.toUpperCase()
-  key.classList.add("key")
-  keyboard.appendChild(key)
-})
-// disable the button and instead of making a div or whatever having this is more convenient
-const key = document.getElementById("keyboard")
-key.setAttribute("disabled", "disabled")
-key.style.pointerEvents = "none"
+setupData()
 
 function checkGuess(guess) {
   const result = []
@@ -63,21 +53,6 @@ function checkGuess(guess) {
   return result
 }
 
-function updateKeyboard(guess, result) {
-  const keys = document.querySelectorAll("#keyboard .key")
-
-  keys.forEach((k) => {
-    const letter = k.textContent.toLowerCase()
-
-    for (let i = 0; i < guess.length; i++) {
-      if (guess[i] === letter) {
-        k.classList.remove("correct", "present", "absent")
-        k.classList.add(result[i])
-      }
-    }
-  })
-}
-
 function addHistory(guess, result) {
   const row = document.createElement("div")
   row.classList.add("history-row")
@@ -96,7 +71,7 @@ function addHistory(guess, result) {
 function updateGuessDisplay() {
   if (currentGuess < maxGuesses) {
     currentGuess++
-    count.textContent = currentGuess + " / " + maxGuesses
+    count.textContent = "Guess Count: " + currentGuess + " / " + maxGuesses
   } else if (currentGuess <= maxGuesses) {
     alert("Game Over Word was: " + randomWord)
     window.location.href = "./lose.html"
@@ -117,7 +92,6 @@ submit.addEventListener("click", () => {
 
   const result = checkGuess(guess)
   addHistory(guess, result)
-  updateKeyboard(guess, result)
 
   if (guess === randomWord) {
     alert("Congratulations! You've guessed the word: " + randomWord)
